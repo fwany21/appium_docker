@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  appium-container:
+    image: appium_farm
+    privileged: true
+    ports:
+      - "4723:4723"
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+    stdin_open: true
+    tty: true
