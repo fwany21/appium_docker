@@ -23,18 +23,10 @@ RUN apt-get update && \
     apt-get update && \
     mkdir /var/config && \
     apt-get install -y openjdk-8-jre nodejs git vim && \
-    git clone https://github.com/fwany21/appium-device-farm.git
-
-# Install global Node.js packages
-WORKDIR /appium-device-farm
-
-RUN npm i -g appium && \
-    appium driver install uiautomator2 && \
-    npm install && \
-    # appium plugin install --source git git+https://github.com/fwany21/appium-device-farm.git --package appium-device-farm && \
+    npm i -g appium && \
+    git clone https://github.com/fwany21/appium-device-farm.git && \
+    git clone https://github.com/fwany21/appium-uiautomator2-driver.git && \
+    cd /appium-uiautomator2-driver && npm install && cd /appium-device-farm && npm install && cd / && \
+    appium driver install --source=local /appium-uiautomator2-driver/ && \
+    appium plugin install --source=local /appium-device-farm/ && \
     appium plugin install --source=npm appium-dashboard
-    #  && \
-    # npm install @appium/doctor -g
-
-# Start a Bash shell as the default command
-# CMD ["appium", "server", "-ka", "800", "--use-plugins=device-farm,appium-dashboard", "-pa", "/wd/hub", "--plugin-device-farm-platform=android", "--allow-insecure=adb_shell"]
