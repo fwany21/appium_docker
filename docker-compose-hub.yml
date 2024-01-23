@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  hub-container:
+    image: fwany21/appium_docker:latest
+    privileged: true
+    environment:
+      - FARM_TYPE=HUB
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+    stdin_open: true
+    network_mode: host
+    tty: true
+    command: ["/var/script/startup.sh"]
