@@ -1,0 +1,16 @@
+version: "3"
+
+services:
+  node-container:
+    image: fwany21/appium_docker:latest
+    privileged: true
+    environment:
+      - FARM_TYPE=NODE
+      ## Please give your HUB address and port
+      - HUB_ADDRESS=127.0.0.1:4723
+    volumes:
+      - /dev/bus/usb:/dev/bus/usb
+    stdin_open: true
+    network_mode: host
+    tty: true
+    command: ["/var/script/startup.sh"]
